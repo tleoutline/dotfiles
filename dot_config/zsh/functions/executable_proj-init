@@ -1,0 +1,159 @@
+#!/usr/bin/env zsh
+
+0=${${(M)${0::=${(%):-%x}}:#/*}:-$PWD/$0}
+local languages=(python c cpp)
+local languages_name=(Python C C++)
+local init_git=false
+
+_print_help() {
+    printf "Usage: proj-init [OPTIONS] <language> [LANGUAGE_OPTIONS] [project_name]\n"
+    printf "Options:\n"
+    printf "%3s %-25s%s\n" "" "-h, --help" "display this help and exit"
+    printf "%3s %-25s%s\n" "" "-l, --list" "list supported languages"
+    printf "%3s %-25s%s\n" "" "-g, --git" "initialize a git repository"
+
+}
+
+print_languages() {
+    local i=1
+    while (( i <= ${#languages[@]} )); do
+        printf "%-10s%s\n" "$languages[$i]" "-- $languages_name[$i]"
+        ((i++))
+    done
+}
+
+unknown_opt() {
+    printf "unknown option: %s\n" "$1" >&2
+}
+
+unimplemented(){
+    printf "%s is not implemented yet.\n" "$1" >&2
+}
+
+proj-init() {
+    if [[ $# == 0 ]]; then
+        _print_help
+        return 1
+    fi
+    
+    PARSED=$(getopt -o +hlg --longoptions help,list,git -n 'proj-init' -- "$@")
+    PARSED=${PARSED# }
+    if [[ $? != 0 ]]; then echo "Parse error" >&2; exit 2; fi
+    eval set -- "$PARSED"
+    
+    local args=()
+    while (( $# )); do
+        case $1 in
+            --)             shift; break ;;
+            -h|--help)      _print_help && return 0 ;;
+            -l|--list)      print_languages && return 0 ;;
+            -g|--git)       init_git=true ;;
+            -*)             unknown_opt "$1" && exit 2 ;;
+            *)              unknown_opt "$1" && exit 2 ;;
+        esac
+        shift
+    done
+
+    if [[ -z $@ ]]; then
+        printf "No language specified. Use -l to see supported languages.\n" >&2
+        return 1
+    fi
+
+    case $@[1] in
+        python)         init_python_project "${@[2,-1]}" ;;
+        *)              unimplemented $args[1] ;;
+    esac
+}
+
+_print_python_help() {
+    printf "Python options:\n"
+    printf "%3s %-25s%s\n" "" "-h, --help" "display this help and exit"
+    printf "%3s %-25s%s\n" "" "-v, --venv <prompt>" "init python venv with prompt"
+    printf "%3s %-25s%s\n" "" "-g, --git" "make a git repo"
+    printf "%3s %-25s%s\n" "" "-a, --autoenv" "make an autoenv \`.env\` file to enter venv (-v required)"
+}
+
+init_python_project() {
+    local project_name
+    local dry_run=false
+    local mk_autoenv=false
+    local mk_venv=false
+    local PARSED_OPTS=$(getopt -o -dhvga --longoptions dry-run,help,venv::,git,autoenv -n 'proj-init-python' -- "$@")
+    PARSED_OPTS=${PARSED_OPTS# }
+    if [[ $? != 0 ]]; then echo "Parse error" >&2; exit 2; fi
+    eval set -- "$PARSED_OPTS"
+    while (( $# )); do
+        case $1 in
+            --)             shift; break;;
+            -h|--help)      _print_python_help && exit 0;;
+            -v|--venv)
+                mk_venv=true; shift;
+                while (( $# )); do
+                    if [[ "${1}" == '' ]]; then shift; continue; fi
+                    if [[ "${1}" != -* ]]; then venv_prompt=$1; fi
+                    break;
+                done;;
+            -v=*|--venv=*)  mk_venv=true; venv_prompt=${1#*=};;
+            -g|--git)       init_git=true ;;
+            -a|--autoenv)   mk_autoenv=true ;;
+            -d|--dry-run)   dry_run=true;;
+            -*)             unknown_opt "$1" && exit 2 ;;
+            *)              project_name=$1; break ;;
+        esac
+        shift
+    done
+
+    project_name=${1}
+
+    if [[ -z $project_name ]]; then
+        printf "no project name specified.\n" >&2
+        exit 1
+    fi
+
+    if [[ $dry_run == true ]]; then
+        printf "Cloning into repo '%s'.\n" "$project_name"
+        if [[ $init_git == true ]]; then
+            printf "Initialized a new git repository.\n"
+        fi
+        
+        if [[ $mk_venv == true ]]; then
+            printf "Created a virtual environment '%s'.\n" "${venv_prompt:-venv}"
+        fi
+        
+        if [[ $mk_autoenv == true ]]; then
+            printf "Autoenv setup created.\n"
+        fi
+
+    else
+        git clone https://github.com/tleoutline/pyproject_template.git "$project_name"
+        pushd "$project_name" || exit 1
+
+        # Modify the pyproject.toml file
+        sed -i "s/name = \"sampleproject\"/name = \"$project_name\"/" pyproject.toml
+
+        # Remove the .git directory
+        rm -rf .git
+
+        if [[ $init_git == true ]]; then
+            git init
+            printf "Initialized a new git repository."
+        fi
+
+        if [[ $mk_venv == true ]]; then
+            python3 -m venv venv --prompt "${venv_prompt:-venv}"
+            printf "Created a virtual environment '%s'.\n" "${venv_prompt:-venv}"
+        fi
+        
+        if [[ $mk_autoenv == true ]]; then
+            echo 'VIRTUAL_ENV_DISABLE_PROMPT=1 source $(readlink -f "$0" | xargs dirname)/venv/bin/activate' > .env
+            # Write to .env.leave file
+            echo 'deactivate' > .env.leave
+            printf "Autoenv setup created."
+        fi
+        popd
+    fi
+    
+    exit 0
+}
+
+proj-init "$@"

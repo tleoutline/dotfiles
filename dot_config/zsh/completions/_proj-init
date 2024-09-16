@@ -1,0 +1,7 @@
+#compdef proj-init
+
+_proj-init() {
+  _arguments "1: :(python)"
+}
+
+_proj-init

@@ -8,6 +8,7 @@ alias venv='python -m venv'
 alias tma="tmux has-session 2> /dev/null && tmux a || tmux"
 alias cl="clear"
 alias cm="chezmoi"
+alias yayup="yay -Syu --noconfirm"
 alias -g ...="../.."
 alias -g ....="../../.."
 alias -g .....="../../../.."

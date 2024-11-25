@@ -8,6 +8,7 @@ $ZDOTDIR/.zstyles
 $ZDOTDIR/custom                            path:autoenv
 $ZDOTDIR/custom                            path:fzf
 $ZDOTDIR/custom                            path:nnn
+$ZDOTDIR/custom                            path:git/github.plugin.zsh
 $ZDOTDIR/completions                       kind:fpath
 $ZDOTDIR/functions                         kind:path
 
@@ -16,6 +17,7 @@ urbainvaes/fzf-marks
 zdharma-continuum/fast-syntax-highlighting kind:zsh
 catppuccin/zsh-syntax-highlighting         path:themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 zsh-users/zsh-completions                  kind:fpath path:src
+ohmyzsh/ohmyzsh                            path:plugins/gh
 ohmyzsh/ohmyzsh                            path:plugins/git
 ohmyzsh/ohmyzsh                            path:plugins/git-auto-fetch
 ohmyzsh/ohmyzsh                            path:plugins/vi-mode

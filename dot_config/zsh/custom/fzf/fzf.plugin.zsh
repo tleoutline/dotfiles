@@ -95,7 +95,7 @@ fzp() {
     --bind "ctrl-h:reload(fd -uL)" \
     --bind "ctrl-b:reload(fd -L -E '.git')" \
     +m \
-    --header="enter:paste ¯é╗ ctrl-h:show hidden ¯é╗ ctrl-b: hide hidden" \
+    --header="enter:paste  ctrl-h:show hidden  ctrl-b: hide hidden" \
     --tac
     )
     

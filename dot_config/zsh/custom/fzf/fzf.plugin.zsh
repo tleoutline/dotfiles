@@ -109,5 +109,5 @@ fzp() {
 }
 
 zle -N fzp
-bindkey  fzp
+bindkey -v '^f' fzp
 

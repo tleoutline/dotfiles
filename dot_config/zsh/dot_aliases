@@ -8,6 +8,7 @@ alias venv='python -m venv'
 alias tma="tmux has-session 2> /dev/null && tmux a || tmux"
 alias cl="clear"
 alias cm="chezmoi"
+alias rn=". ranger ranger"
 alias yayup="yay -Syu --noconfirm"
 alias -g ...="../.."
 alias -g ....="../../.."
@@ -20,9 +21,9 @@ alias -g ......="../../../../.."
 # alias ......="z ../../../../.."
 
 alias l='lsd --group-dirs=first'
-alias ls='lsd --almost-all --group-dirs=first'
-alias ll='lsd --long --group-dirs=first'
-alias la='lsd --long --almost-all --group-dirs=first'
+alias ls='lsd --group-dirs=first --almost-all --oneline'
+alias ll='lsd --group-dirs=first --long'
+alias la='lsd --group-dirs=first --almost-all --long'
 
 alias llm='lsd --timesort --long --group-dirs=first'
 alias lS='lsd --oneline --classic --group-dirs=first'

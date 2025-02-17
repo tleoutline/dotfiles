@@ -8,6 +8,7 @@ $ZDOTDIR/.zstyles
 $ZDOTDIR/custom                            path:autoenv
 $ZDOTDIR/custom                            path:fzf
 $ZDOTDIR/custom                            path:nnn
+$ZDOTDIR/custom                            path:yay
 $ZDOTDIR/custom                            path:git/github.plugin.zsh
 $ZDOTDIR/completions                       kind:fpath
 $ZDOTDIR/functions                         kind:path

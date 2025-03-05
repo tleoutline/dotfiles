@@ -3,6 +3,7 @@ export FZF_MARKS_FILE=${HOME}/.config/fzf-marks
 . /usr/share/autoenv-git/activate.sh
 eval "$(zoxide init zsh)"
 . '/usr/share/zsh-antidote/antidote.zsh'
+autoload -U colors && colors
 antidote load
 
 setopt append_history         # append history list so all shell share the same hist

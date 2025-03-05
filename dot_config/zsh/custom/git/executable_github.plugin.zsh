@@ -1,15 +1,19 @@
 #!/usr/bin/env zsh
 
 function _query_user {
-  local fzf_options=(--header='Select a user'\
-    --height 40%)
   local user_query=$1
+  local fzf_options=(--header='Select a user' \
+    +m \
+    # --query="$user_query" \
+    # --select-1 \
+    --height 40%)
   local result=$(gh api "search/users?q=${user_query}" | jq -r '.items[].login' | fzf ${fzf_options})
   echo $result
 }
 
 function _query_repo {
   local fzf_options=(--header='Select a repo' \
+    +m \
     --height 40%)
   local repo_owner=$1
   local repo=$(gh api "users/${repo_owner}/repos" | jq -r '.[].name' | fzf ${fzf_options})

@@ -1,0 +1,22 @@
+#compdef git-homelab
+
+_git-homelab() {
+  _arguments -C \
+    '1:command:(init remove list)' \
+    '2:repo:->repo'
+
+  case "$state" in
+    (repo)
+      case $words[2] in
+        (rm | remove)
+          compadd -- $(git-homelab ls)
+        ;;
+        (*)
+          _arguments '2:repo:'
+         ;;
+      esac
+    ;;
+  esac
+}
+
+_git-homelab

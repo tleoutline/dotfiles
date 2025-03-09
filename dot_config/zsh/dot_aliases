@@ -33,3 +33,4 @@ alias lt='lsd --tree --depth=2 --group-dirs=first'
 alias lat='lsd --tree --almost-all --depth=2 --group-dirs=first'
 alias lta='lsd --tree --almost-all --depth=2 --group-dirs=first'
 
+alias ghl='git-homelab'

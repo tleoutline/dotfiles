@@ -5,6 +5,7 @@ eval "$(zoxide init zsh)"
 . '/usr/share/zsh-antidote/antidote.zsh'
 autoload -U colors && colors
 antidote load
+source <(fzf --zsh)
 
 setopt append_history         # append history list so all shell share the same hist
 setopt extended_history       # record timestamp of command in HISTFILE

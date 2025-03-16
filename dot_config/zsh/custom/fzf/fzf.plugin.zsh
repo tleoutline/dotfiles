@@ -4,6 +4,15 @@
 # press [enter] to kill selected processes and go back to the process list.
 # or press [escape] to go back to the process list. Press [escape] twice to exit completely.
 
+export FZF_CTRL_T_OPTS="
+  --height 40%
+  --walker-skip .git,node_modules,target
+  --bind 'ctrl-d:preview-half-page-down'
+  --bind 'ctrl-u:preview-half-page-up'
+  --preview 'bat -n --color=always {} 2> /dev/null || \
+    lsd --tree --depth=2 --group-dirs=first --almost-all --color=always --icon=always {}' "
+
+
 kp() {
     local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
 
@@ -72,29 +81,3 @@ function _fz_jump_paste_command {
     LBUFFER="${LBUFFER}$directory"
     zle reset-prompt > /dev/null 2>&1
 }
-
-function fzp {
-  local result
-  local fzf_args=(
-    --height 40%
-    --reverse
-    --ansi \
-    --bind "ctrl-h:reload(fd -uL)" \
-    --bind "ctrl-b:reload(fd -L -E '.git')" \
-    +m \
-    --header="enter:paste  ctrl-h:show hidden  ctrl-b: hide hidden" \
-    --tac
-    )
-    
-  
-  local lines=$(fd -L -E '.git' | fzf $fzf_args)
-  local result=$(tail -1 <<< "$lines")
-
-  if [[ -n "$result" ]]; then
-    eval -- "_fz_jump_paste_command \"\$result\""
-  fi
-}
-
-zle -N fzp
-bindkey -v '^f' fzp
-

@@ -28,6 +28,6 @@ ohmyzsh/ohmyzsh                            path:plugins/git-auto-fetch
 ohmyzsh/ohmyzsh                            path:plugins/vi-mode
 psprint/zsh-sweep
 romkatv/zsh-bench                          kind:path
-hlissner/zsh-autopair                      path/autopair.zsh
+hlissner/zsh-autopair                      path:autopair.zsh
 
 $ZDOTDIR/.zbinds

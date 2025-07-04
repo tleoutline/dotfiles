@@ -42,7 +42,7 @@ function git-homelab() {
 function ghltools::add_remote() {
   local remote_addr=$1
   # Prompt to add a remote
-  read -q "REPLY?Do you want to add a remote and push? (y/N): "
+  read -q "REPLY?Do you want to add the remote? (y/N): "
   echo
   if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     # Ask for remote name, default to 'origin' if left empty
@@ -54,11 +54,6 @@ function ghltools::add_remote() {
       echo "Remote '$remote_name' already exists." >&2
       return
     }
-
-    # Push current branch to the remote
-    current_branch=$(git symbolic-ref --short HEAD)
-    echo "Pushing current branch '$current_branch' to '$remote_name'..."
-    git push -u "$remote_name" "$current_branch"
   fi
 }
 

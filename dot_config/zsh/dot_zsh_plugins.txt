@@ -19,6 +19,7 @@ urbainvaes/fzf-marks
 # zsh-users/zsh-syntax-highlighting
 zdharma-continuum/fast-syntax-highlighting kind:zsh
 catppuccin/zsh-syntax-highlighting         path:themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
+catppuccin/fzf                             path:themes/catppuccin-fzf-mocha.sh
 zsh-users/zsh-completions                  kind:fpath path:src
 ohmyzsh/ohmyzsh                            kind:fpath path:plugins/docker/completions/
 ohmyzsh/ohmyzsh                            path:plugins/colored-man-pages

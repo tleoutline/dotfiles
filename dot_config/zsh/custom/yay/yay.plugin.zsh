@@ -1,9 +1,9 @@
 yayin() {
-    if [ $1 ]; then
-        yay -Ssq "$1" 2>/dev/null | fzf -m --preview 'yay -Si {1}' --preview-window 'right,70%' | xargs -ro yay -S
-    else
-        yay -Slq 2>/dev/null | fzf -m --preview 'yay -Si {1}' --preview-window 'right,70%' | xargs -ro yay -S
-    fi
+  if [ $1 ]; then
+      yay -Ssq "$1" 2>/dev/null | fzf -m --preview 'yay -Si {1}' --preview-window 'right,70%' --header-label="query" --header="$1" | xargs -ro yay -S
+  else
+      yay -Slq 2>/dev/null | fzf -m --preview 'yay -Si {1}' --preview-window 'right,70%' | xargs -ro yay -S
+  fi
 }
 
 yayrm() {

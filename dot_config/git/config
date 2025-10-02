@@ -12,3 +12,5 @@
   cmd = nvim -n -c "DiffviewOpen" "$MERGE"
 [pull]
 	rebase = true
+[init]
+	defaultBranch = main

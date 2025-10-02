@@ -1,5 +1,3 @@
-# vim:set ft=tmux:
-
 set -g @beebee_indicator_normal_text "NORM"
 set -g @beebee_indicator_normal_text_color "#{@thm_surface_1}"
 set -g @beebee_indicator_normal_bg_color "#{@thm_green}"

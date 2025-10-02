@@ -7,4 +7,3 @@ export SAVEHIST=2000
 export HISTSIZE=2500
 export ZSH_COMPDUMP=$ZSH_CACHE/zcompdump
 export ANTIDOTE_HOME=$XDG_DATA_HOME/antidote
-

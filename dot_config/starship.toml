@@ -18,3 +18,8 @@ style = 'bold blue'
 
 symbol = ' '
 style = 'bold blue'
+
+[golang]
+
+symbol = ' '
+style = 'bold blue'

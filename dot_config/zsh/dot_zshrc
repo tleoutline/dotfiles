@@ -4,6 +4,8 @@ export FZF_MARKS_FILE=${HOME}/.config/fzf-marks
 eval "$(zoxide init zsh)"
 . '/usr/share/zsh-antidote/antidote.zsh'
 autoload -U colors && colors
+unalias run-help
+autoload run-help
 antidote load
 source <(fzf --zsh)
 

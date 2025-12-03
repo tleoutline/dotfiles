@@ -6,6 +6,8 @@ eval "$(zoxide init zsh)"
 autoload -U colors && colors
 unalias run-help
 autoload run-help
+# ez-compinit cache compdef every 20h. use `compinit` to force load new compdef
+zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
 antidote load
 source <(fzf --zsh)
 

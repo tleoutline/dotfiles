@@ -1,4 +1,4 @@
 #vim:ft=zsh
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
-bindkey ^g fzm
+bindkey -M viins ^g fzm

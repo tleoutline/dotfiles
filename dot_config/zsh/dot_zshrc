@@ -1,5 +1,7 @@
 zs_set_path=1
 export FZF_MARKS_FILE=${HOME}/.config/fzf-marks
+export NVM_LAZY_LOAD=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim')
 . /usr/share/autoenv-git/activate.sh
 eval "$(zoxide init zsh)"
 . '/usr/share/zsh-antidote/antidote.zsh'

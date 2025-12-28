@@ -2,7 +2,8 @@
 zs_set_path=1
 export FZF_MARKS_FILE=${HOME}/.config/fzf-marks
 export NVM_LAZY_LOAD=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
+zvm_config() {:}
 . /usr/share/autoenv-git/activate.sh
 eval "$(zoxide init zsh)"
 . '/usr/share/zsh-antidote/antidote.zsh'
@@ -24,7 +25,7 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt share_history          # share command history data
 
 run-compinit
-export KEYTIMEOUT=40
+export KEYTIMEOUT=200
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true

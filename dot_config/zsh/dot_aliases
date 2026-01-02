@@ -20,6 +20,9 @@ alias -g ......="../../../../.."
 # alias .....="z ../../../.."
 # alias ......="z ../../../../.."
 
+alias -s json="jless"
+alias -s md="glow"
+
 alias l='lsd --group-dirs=first'
 alias ls='lsd --group-dirs=first --almost-all --oneline'
 alias ll='lsd --group-dirs=first --long'

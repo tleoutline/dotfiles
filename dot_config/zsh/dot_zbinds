@@ -2,3 +2,4 @@
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
 bindkey -M viins ^g fzm
+bindkey -M viins ^z undo

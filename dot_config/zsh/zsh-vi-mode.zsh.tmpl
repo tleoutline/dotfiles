@@ -1,0 +1,21 @@
+zvm_after_init() {
+  source <(fzf --zsh)
+  bindkey -M viins ^g fzm
+  bindkey -M viins ^z undo
+}
+
+zvm_after_lazy_keybindings() {
+  zvm_bindkey viins 'jk' zvm_exit_insert_mode
+  zvm_bindkey viins 'kj' zvm_exit_insert_mode
+}
+
+ZVM_VI_INSERT_ESCAPE_BINDKEY='^['
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_KEYTIMEOUT=0.2
+ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BEAM
+ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
+{{ if ( eq .chezmoi.hostname "Arch-wsl" ) }}
+ZVM_CLIPBOARD_COPY_CMD='win32yank.exe -i --crlf'
+ZVM_CLIPBOARD_PASTE_CMD='win32yank.exe -o --lf'
+{{ end }}

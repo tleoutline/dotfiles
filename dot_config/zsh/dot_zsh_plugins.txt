@@ -3,6 +3,7 @@ mattmc3/ez-compinit
 getantidote/use-omz
 ohmyzsh/ohmyzsh                            path:lib/key-bindings.zsh
 
+$ZDOTDIR/zsh-vi-mode.zsh
 $ZDOTDIR/.aliases
 $ZDOTDIR/.zstyles
 $ZDOTDIR/custom                            path:autoenv
@@ -17,7 +18,6 @@ $ZDOTDIR/functions                         kind:path
 $GOPATH/bin                                kind:path
 
 urbainvaes/fzf-marks
-# zsh-users/zsh-syntax-highlighting
 zdharma-continuum/fast-syntax-highlighting kind:zsh
 catppuccin/zsh-syntax-highlighting         path:themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 catppuccin/fzf                             path:themes/catppuccin-fzf-mocha.sh

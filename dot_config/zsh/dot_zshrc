@@ -3,16 +3,19 @@ zs_set_path=1
 export FZF_MARKS_FILE=${HOME}/.config/fzf-marks
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
-zvm_config() {:}
-. /usr/share/autoenv-git/activate.sh
-eval "$(zoxide init zsh)"
-. '/usr/share/zsh-antidote/antidote.zsh'
+
+source /usr/share/autoenv-git/activate.sh
+source <(zoxide init zsh)
+
 autoload -U colors && colors
 unalias run-help
 autoload run-help
+
+source '/usr/share/zsh-antidote/antidote.zsh'
 zstyle ':antidote:bundle' use-friendly-names 'yes'
+export ANTIDOTE_HOME=$XDG_DATA_HOME/antidote
 antidote load
-source <(fzf --zsh)
+
 
 setopt append_history         # append history list so all shell share the same hist
 setopt extended_history       # record timestamp of command in HISTFILE
@@ -23,13 +26,10 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt share_history          # share command history data
 
 run-compinit
-export KEYTIMEOUT=200
-bindkey -M viins 'jk' vi-cmd-mode
-bindkey -M viins 'kj' vi-cmd-mode
+export KEYTIMEOUT=40
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
 
-
-eval "$(starship init zsh)"
+source <(starship init zsh)
 # eval "$(_PIO_COMPLETE=zsh_source pio)"
 # zprof

@@ -1,0 +1,6 @@
+[mgr]
+prepend_keymap = [
+  { on = ["M","s"],      run = "plugin sshfs -- menu", desc = "Open SSHFS options"    },
+  { on = ["<PageUp>"],   run = "seek -5",              desc = "Scroll up half page"   },
+  { on = ["<PageDown>"], run = "seek 5",               desc = "Scroll down half page" },
+]

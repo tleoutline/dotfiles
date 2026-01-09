@@ -1,0 +1,6 @@
+set viminfo+=n~/.local/state/vim/viminfo
+set rnu
+set number
+let g:mapleader = " "
+map <Leader>w :w<CR>
+map <Leader>q :q<CR>

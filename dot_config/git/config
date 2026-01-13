@@ -15,3 +15,7 @@
 	rebase = true
 [init]
 	defaultBranch = main
+[filter "ageencrypt"]
+	smudge = age -d -i ~/.config/age/key.txt -
+	clean = age -e -r age1lew24twed8zkma5rnp35mg2dt3w3gkevs8ukh4avdag4vt4wzpts25wcne -a -
+	required = true

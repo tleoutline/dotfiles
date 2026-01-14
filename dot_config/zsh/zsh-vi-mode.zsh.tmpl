@@ -2,9 +2,6 @@ zvm_after_init() {
   source <(fzf --zsh)
   bindkey -M viins ^g fzm
   bindkey -M viins ^z undo
-}
-
-zvm_after_lazy_keybindings() {
   zvm_bindkey viins 'jk' zvm_exit_insert_mode
   zvm_bindkey viins 'kj' zvm_exit_insert_mode
 }

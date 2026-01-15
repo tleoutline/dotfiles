@@ -17,5 +17,7 @@
 	defaultBranch = main
 [filter "ageencrypt"]
 	smudge = age -d -i ~/.config/age/key.txt -
-	clean = age -e -r age1lew24twed8zkma5rnp35mg2dt3w3gkevs8ukh4avdag4vt4wzpts25wcne -a -
+	clean = /home/tle/.config/git/scripts/git_filter_age_clean %f
 	required = true
+[diff "ageencrypt"]
+	textconv = cat

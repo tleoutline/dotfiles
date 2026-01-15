@@ -1,0 +1,32 @@
+#!/usr/bin/env -S bash -euo pipefail
+# vim ft=sh
+
+# we need $1 to be the path of the file so we can check the previous version
+# via git-show to prevent the encryption's non-determinism from resulting in
+# unnecessary changes
+if test $# -ne 1; then
+  echo "Usage: $0 FILE" >&2
+  exit 1
+fi
+
+if ! git cat-file -e "HEAD:$1" &>/dev/null; then
+  # if git cat-file -e fails, then the file doesn't exist at HEAD, so it's new,
+  # meaning we need to encrypt it for the first time
+  # echo "$0: no previous version found while cleaning $1" >&2
+  age --encrypt -a -r age1lew24twed8zkma5rnp35mg2dt3w3gkevs8ukh4avdag4vt4wzpts25wcne "$1"
+
+  # TODO: figure out a better way to open fd 3
+elif exec 3< <(echo -n) && diff \
+  <(git cat-file -p "HEAD:$1" | age --decrypt -i ~/.config/age/key.txt -) \
+  <(cat /dev/stdin | tee /dev/fd/3) >/dev/null; then
+  # if there's no difference between the decrypted version of the file at HEAD
+  # and the new contents, then we re-use the previous version to prevent
+  # unnecessary file updates
+  # echo "$0: no changes found while cleaning $1" >&2
+  git cat-file -p "HEAD:$1"
+else
+  # if there is a difference then we re-encrypt it from fd 3, where we
+  # duplicated stdin to
+  # echo "$0: found changes while cleaning $1" >&2
+  git cat-file -p "HEAD:$1" | age --encrypt -a -r age1lew24twed8zkma5rnp35mg2dt3w3gkevs8ukh4avdag4vt4wzpts25wcne /dev/fd/3
+fi

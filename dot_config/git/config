@@ -17,7 +17,8 @@
 	defaultBranch = main
 [filter "ageencrypt"]
 	smudge = age -d -i ~/.config/age/key.txt -
-	clean = /home/tle/.config/git/scripts/git_filter_age_clean %f
+	clean = ~/.config/git/scripts/git_filter_age_clean %f
 	required = true
 [diff "ageencrypt"]
+	# prevent git diff from treating encrypted files as binary
 	textconv = cat

@@ -22,3 +22,6 @@
 [diff "ageencrypt"]
 	# prevent git diff from treating encrypted files as binary
 	textconv = cat
+
+[diff "chezmoi-age"]
+	textconv = ~/.config/git/scripts/git_decrypt_age %f

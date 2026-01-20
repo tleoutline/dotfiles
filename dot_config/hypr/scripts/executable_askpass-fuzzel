@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Take password prompt from STDIN, print password to STDOUT
+fuzzel --dmenu \
+	--password \
+	--minimal-lines

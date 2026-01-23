@@ -24,4 +24,4 @@
 	textconv = cat
 
 [diff "chezmoi-age"]
-	textconv = ~/.config/git/scripts/git_decrypt_age %f
+	textconv = ~/.config/git/scripts/git_decrypt_age

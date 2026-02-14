@@ -4,4 +4,5 @@ prepend_keymap = [
   { on = ["<PageUp>"],   run = "seek -5",              desc = "Scroll up half page"   },
   { on = ["<PageDown>"], run = "seek 5",               desc = "Scroll down half page" },
   { on = [ "c", "m" ],   run = "plugin chmod",         desc = "Chmod on selected files" }
+  { on = ["<enter>"],    run = "enter",                desc = "enter" }
 ]

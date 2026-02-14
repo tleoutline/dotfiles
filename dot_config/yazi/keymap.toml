@@ -1,8 +1,8 @@
 [mgr]
 prepend_keymap = [
-  { on = ["M","s"],      run = "plugin sshfs -- menu", desc = "Open SSHFS options"    },
-  { on = ["<PageUp>"],   run = "seek -5",              desc = "Scroll up half page"   },
-  { on = ["<PageDown>"], run = "seek 5",               desc = "Scroll down half page" },
-  { on = [ "c", "m" ],   run = "plugin chmod",         desc = "Chmod on selected files" }
+  { on = ["m","s"],      run = "plugin sshfs -- menu", desc = "open sshfs options"    },
+  { on = ["<pageup>"],   run = "seek -5",              desc = "scroll up half page"   },
+  { on = ["<pagedown>"], run = "seek 5",               desc = "scroll down half page" },
+  { on = [ "c", "m" ],   run = "plugin chmod",         desc = "chmod on selected files" }
   { on = ["<enter>"],    run = "enter",                desc = "enter" }
 ]

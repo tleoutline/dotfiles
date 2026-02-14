@@ -1,2 +1,0 @@
-#!/usr/bin/env -S bash -euo pipefail
-age --decrypt -i ~/.config/age/key.txt $1

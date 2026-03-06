@@ -42,9 +42,9 @@
     },
     "hyprland/workspaces": {
         "format": "{icon}",
-        "format-icons": {
-            "active": "󰝥"
-        },
+        //        "format-icons": {
+        //            "active": "󰝥"
+        //        },
         "cursor": 58
     },
     "hyprland/window": {

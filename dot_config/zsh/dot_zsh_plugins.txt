@@ -18,6 +18,7 @@ $ZDOTDIR/functions                         kind:path
 $GOPATH/bin                                kind:path
 
 urbainvaes/fzf-marks
+Aloxaf/fzf-tab
 zdharma-continuum/fast-syntax-highlighting kind:zsh
 catppuccin/zsh-syntax-highlighting         path:themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 catppuccin/fzf                             path:themes/catppuccin-fzf-mocha.sh

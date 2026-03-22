@@ -13,7 +13,15 @@ zstyle ':completion:*' matcher-list '' \
   'm:{a-z\-}={A-Z\_}' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
-zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+# fzf-tab does not work with escape sequences (like '%F{red}%d%f')
+# zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'lsd -1 --color=always $realpath'
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':completion:*' group-name ''
 
 compdef z=cd  # Using cd's completion for zoxide

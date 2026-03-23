@@ -21,8 +21,8 @@ zstyle ':completion:*' menu no
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:z:*' fzf-preview 'lsd -1 --color=always $realpath'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:complete:nvim:*' fzf-preview '~/.config/zsh/_ftb_preview_path.zsh $realpath'
 zstyle ':completion:*' group-name ''
 
-compdef z=cd  # Using cd's completion for zoxide
+compdef directories z
 compdef v=nvim

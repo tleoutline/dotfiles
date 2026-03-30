@@ -25,7 +25,7 @@ alias -s json="jless"
 alias -s md="glow"
 
 alias l='lsd --group-dirs=first'
-alias ls='lsd --group-dirs=first --almost-all --oneline'
+alias ls='lsd --group-dirs=first --almost-all'
 alias ll='lsd --group-dirs=first --long'
 alias la='lsd --group-dirs=first --almost-all --long'
 

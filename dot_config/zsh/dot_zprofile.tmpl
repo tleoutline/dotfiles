@@ -1,0 +1,27 @@
+{{- if eq .chezmoi.hostname "athena" -}}
+win_path=(
+  "/mnt/c/WINDOWS"
+  "/mnt/c/WINDOWS/system32"
+  "/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/"
+  "/mnt/c/Program Files/PowerShell/7/"
+  "/mnt/c/Program Files/dotnet/"
+  "/mnt/c/Program Files/Neovim/bin/"
+  "/mnt/c/Program Files/WezTerm"
+  "/mnt/c/Program Files/komorebi/bin/"
+  "/mnt/c/Program Files/whkd/bin/"
+  "/mnt/c/Program Files/YASB/"
+  "/mnt/c/Program Files/glzr.io/GlazeWM/cli"
+)
+
+path+=($win_path)
+{{- else if eq .chezmoi.hostname "themis" -}}
+win_path=(
+  "/mnt/c/WINDOWS"
+  "/mnt/c/WINDOWS/system32"
+  "/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/"
+  "/mnt/c/Program Files/PowerShell/7/"
+  "/mnt/c/Program Files/dotnet/"
+)
+
+path+=($win_path)
+{{ end }}

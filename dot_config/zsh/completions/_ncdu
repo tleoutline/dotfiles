@@ -1,0 +1,62 @@
+#compdef ncdu
+
+_ncdu() {
+    local arguments
+
+    arguments=(
+    # Mode selection
+    '(-h --help)'{-h,--help}'[display help message]'
+    '(-v -V --version)'{-v,-V,--version}'[print version]'
+    '-f[import scanned directory from FILE]:file:_files'
+    '-o[export scanned directory to FILE in JSON format]:file:_files'
+    '-O[export scanned directory to FILE in binary format]:file:_files'
+    '(-e --extended)'{-e,--extended}'[enable extended information]'
+    '--ignore-config[don''t load config files]'
+
+    # Scan options
+    '(-x --one-file-system)'{-x,--one-file-system}'[stay on the same filesystem]'
+    '--exclude[exclude files that match PATTERN]:pattern'
+    '(-X --exclude-from)'{-X,--exclude-from}'[exclude files that match any pattern in FILE]:file:_files'
+    '--exclude-caches[exclude directories containing CACHEDIR.TAG]'
+    '(-L --follow-symlinks)'{-L,--follow-symlinks}'[follow symbolic links (excluding directories)]'
+    '--exclude-kernfs[exclude Linux pseudo filesystems (procfs,sysfs,cgroup,...)]'
+    '-t[scan with NUM threads]:threads'
+
+    # Export options
+    '(-c --compress)'{-c,--compress}'[use Zstandard compression with -o]'
+    '--compress-level[set compression level]:level'
+    '--export-block-size[set export block size with -O]:kib'
+
+    # Interface options
+    '(-0 -1 -2)'{-0,-1,-2}'[UI to use when scanning (0=none, 2=full ncurses)]'
+    '(-q --slow-ui-updates)'{-q,--slow-ui-updates}'["quiet" mode, refresh interval 2 seconds]'
+    '--enable-shell[enable shell spawning feature]'
+    '--enable-delete[enable file deletion feature]'
+    '--enable-refresh[enable directory refresh feature]'
+    '-r[read only (disable delete)]'
+    '-rr[read only++ (disable delete & shell)]'
+    '--si[use base 10 (SI) prefixes instead of base 2]'
+    '--apparent-size[show apparent size instead of disk usage by default]'
+    '--hide-hidden[hide "hidden" or excluded files by default]'
+    '--show-itemcount[show item count column by default]'
+    '--show-mtime[show mtime column by default (requires -e)]'
+    '--show-graph[show graph column by default]'
+    '--show-percent[show percent column by default]'
+    '--graph-style[set graph style]:style:(hash half-block eighth-block)'
+    '--shared-column[set shared column mode]:mode:(off shared unique)'
+    '--sort[set sort order]:column:(disk-usage-asc disk-usage-desc name-asc name-desc apparent-size-asc apparent-size-desc itemcount-asc itemcount-desc mtime-asc mtime-desc)'
+    '--enable-natsort[use natural order when sorting by name]'
+    '--group-directories-first[sort directories before files]'
+    '--confirm-quit[ask confirmation before quitting ncdu]'
+    '--no-confirm-delete[don''t ask confirmation before deletion]'
+    '--delete-command[command to run for file deletion]:command:_command_names -e'
+    '--color[set color scheme]:scheme:(off dark dark-bg)'
+
+    # Positional argument
+    '*:directory:_files -/'
+    )
+
+    _arguments -s -S $arguments
+}
+
+_ncdu "$@"

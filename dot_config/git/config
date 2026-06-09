@@ -16,7 +16,8 @@
 [init]
 	defaultBranch = main
 [url "forgejo@git.beeyard.cc:"]
-	insteadOf = http://forgejo.beeyard.cc
+	insteadOf = http://forgejo.beeyard.cc/
+	insteadOf = https://forgejo.beeyard.cc/
 [filter "ageencrypt"]
 	smudge = age -d -i ~/.config/age/key.txt -
 	clean = ~/.config/git/scripts/git_filter_age_clean %f

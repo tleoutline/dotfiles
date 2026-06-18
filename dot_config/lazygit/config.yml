@@ -502,7 +502,7 @@ os:
   editAtLineAndWait: ""
 
   # Whether lazygit suspends until an edit process returns
-  editInTerminal: false
+  editInTerminal: true
 
   # For opening a directory in an editor
   openDirInEditor: ""

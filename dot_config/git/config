@@ -28,3 +28,5 @@
 
 [diff "chezmoi-age"]
 	textconv = age -d -i ~/.config/age/key.txt
+[safe]
+	directory = /mnt/c/Users/tleou/Project/Honeybill

@@ -15,7 +15,7 @@
 	rebase = true
 [init]
 	defaultBranch = main
-[url "forgejo@git.beeyard.cc:"]
+[url "forgejo@forgejo.beeyard.cc:"]
 	insteadOf = http://forgejo.beeyard.cc/
 	insteadOf = https://forgejo.beeyard.cc/
 [filter "ageencrypt"]

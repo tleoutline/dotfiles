@@ -1,9 +1,10 @@
 [mgr]
 prepend_keymap = [
-  { on = ["m","s"],      run = "plugin sshfs -- menu", desc = "open sshfs options"    },
-  { on = ["<pageup>"],   run = "seek -5",              desc = "scroll up half page"   },
-  { on = ["<pagedown>"], run = "seek 5",               desc = "scroll down half page" },
-  { on = [ "c", "m" ],   run = "plugin chmod",         desc = "chmod on selected files" },
-  { on = ["<enter>"],    run = "enter",                desc = "enter" },
-  { on = ["g", "/"],     run = "cd /",                 desc = "Go to root" },
+  { on = ["m","s"],      run = "plugin sshfs -- menu",    desc = "open sshfs options"    },
+  { on = ["<pageup>"],   run = "seek -5",                 desc = "scroll up half page"   },
+  { on = ["<pagedown>"], run = "seek 5",                  desc = "scroll down half page" },
+  { on = [ "c", "m" ],   run = "plugin chmod",            desc = "chmod on selected files" },
+  { on = ["<enter>"],    run = "enter",                   desc = "enter" },
+  { on = ["g", "/"],     run = "cd /",                    desc = "Go to root" },
+  { on = [ "R" ],        run = "plugin rsync --remember", desc = "Copy files using rsync" },
 ]

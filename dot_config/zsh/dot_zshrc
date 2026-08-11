@@ -25,6 +25,10 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt share_history          # share command history data
 unsetopt beep                 # no terminal bell noise
 
+if command -v trash &> /dev/null; then
+  alias rm='trash-rm'
+fi
+
 run-compinit
 export KEYTIMEOUT=40
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true

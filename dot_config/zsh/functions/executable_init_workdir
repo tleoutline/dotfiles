@@ -1,0 +1,79 @@
+#!/usr/bin/env zsh
+
+echo "Setting up autoenv..."
+
+# 0. Check for version control repository
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Not in a git repository."
+    read "choice?Initialize repository? (y/N) "
+    if [[ "$choice" =~ ^[Yy]$ ]]; then
+        if command -v jj > /dev/null 2>&1; then
+            echo "Initializing jujutsu repository..."
+            jj git init
+        else
+            echo "Initializing git repository..."
+            git init
+        fi
+    fi
+fi
+
+# 1. Create directories and blank files
+mkdir -p scripts
+touch .env
+touch scripts/utils.sh
+
+# 2. Create the enter script (.autoenv)
+cat << 'EOF' > .autoenv
+# Export variables
+set -a
+[ -f "$AUTOENV_CUR_DIR/.env" ] && source "$AUTOENV_CUR_DIR/.env"
+set +a
+
+# Load functions
+[ -f "$AUTOENV_CUR_DIR/scripts/utils.sh" ] && source "$AUTOENV_CUR_DIR/scripts/utils.sh"
+EOF
+
+# 3. Create the leave script (.autoenv.leave)
+cat << 'EOF' > .autoenv.leave
+# Unset variables defined in .env
+if [ -f "$AUTOENV_CUR_DIR/.env" ]; then
+  while IFS='=' read -r key _; do
+    # Skip empty lines and comments
+    [[ -n "$key" && ! "$key" =~ ^# ]] && unset "$key"
+  done < "$AUTOENV_CUR_DIR/.env"
+fi
+
+# Unset functions defined in utils.sh by grabbing their names with grep
+if [ -f "$AUTOENV_CUR_DIR/scripts/utils.sh" ]; then
+  for func in $(grep -oE '^[a-zA-Z0-9_:-]+\s*\(\)' "$AUTOENV_CUR_DIR/scripts/utils.sh" | sed 's/[[:space:]]*()//'); do
+    unset -f "$func"
+  done
+fi
+EOF
+
+# 4. Append to .gitattributes if inside a repo
+if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    cat << 'EOF' >> .gitignore
+.env
+EOF
+    # Securely append age public key to .sops.yaml
+    AGE_KEY_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/age/key.txt"
+    if [ -f "$AGE_KEY_FILE" ]; then
+        # Extract public key line, then grab the key itself
+        PUB_KEY=$(grep '^# public key:' "$AGE_KEY_FILE" | cut -d ' ' -f 4)
+        
+        if [ -n "$PUB_KEY" ]; then
+            cat << EOF >> .sops.yaml
+creation_rules:
+    - age: '$PUB_KEY'
+EOF
+            echo "Added age key to .sops.yaml"
+        else
+            echo "Error: Could not extract public key from $AGE_KEY_FILE"
+        fi
+    else
+        echo "Error: Age key file not found at $AGE_KEY_FILE"
+    fi
+fi
+
+

@@ -8,7 +8,7 @@ truncation_symbol = '../'
 
 [custom.cpp]
 
-format = 'via [$symbol(v$output-g++)]($style)'
+format = 'via [$symbol(v$output-g++)]($style) '
 command = '''g++ --version | rg -oP "(?<=g\+\+ \(GCC\) )\d+\.\d+\.\d+"'''
 detect_extensions = ['cpp', 'hpp']
 symbol = '++ '
@@ -23,3 +23,12 @@ style = 'bold blue'
 
 symbol = ' '
 style = 'bold blue'
+
+[gcloud]
+
+format = 'on [$symbol $project (\($region\))]($style) '
+symbol = '☁️'
+detect_env_vars = ['CLOUDSDK_ACTIVE_CONFIG_NAME']
+
+[gcloud.region_aliases]
+asia-southeast3 = 'bangkok'

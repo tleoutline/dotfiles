@@ -1,0 +1,56 @@
+{
+  "ui": {
+    "theme": "/home/tle/.gemini/themes/catppuccin-mocha.json",
+    "errorVerbosity": "low"
+  },
+  "general": {
+    "vimMode": true,
+    "preferredEditor": "neovim"
+  },
+  "context": {
+    "fileName": [
+      "AGENTS.md",
+      "CONTEXT.md",
+      "GEMINI.md"
+    ]
+  },
+  "model": {
+    "name": "coder-3.1"
+  },
+  "modelConfigs": {
+    "customAliases": {
+      "coder-3.1": {
+        "modelConfig": {
+          "model": "gemini-3.1-flash-lite",
+          "generateContentConfig": {
+            "temperature": 0.2,
+            "topP": 0.95,
+            "topK": 40,
+            "maxOutputTokens": 8192
+          }
+        }
+      },
+      "coder-2.5": {
+        "modelConfig": {
+          "model": "gemini-2.5-flash-lite",
+          "generateContentConfig": {
+            "temperature": 0.2,
+            "topP": 0.95,
+            "topK": 40,
+            "maxOutputTokens": 8192
+          }
+        }
+      }
+    }
+  },
+  "security": {
+    "auth": {
+      "selectedType": "gemini-api-key"
+    }
+  },
+  "mcpServers": {
+    "vectorcode": {
+      "command": "vectorcode-mcp-server"
+    }
+  }
+}

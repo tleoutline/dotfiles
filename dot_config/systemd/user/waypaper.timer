@@ -1,9 +1,31 @@
 [Unit]
-Description=Set a random wallpaper every minute
+Description=Set a random wallpaper after a period of time
 
 [Timer]
 Persistent=true
-OnCalendar=*:0/1
+
+; OnCalendar IS NOT USED ANYMORE!
+; move to OnUnit
+; systemd calendar event use different format that crontab
+; syntax: weekday yy-mm-dd hh:mm:ss
+;
+; a section from systemd.time man page:
+; The following special expressions may be used as shorthands for longer normalized forms:
+;     minutely → *-*-* *:*:00
+;       hourly → *-*-* *:00:00
+;        daily → *-*-* 00:00:00
+;      monthly → *-*-01 00:00:00
+;       weekly → Mon *-*-* 00:00:00
+;       yearly → *-01-01 00:00:00
+;    quarterly → *-01,04,07,10-01 00:00:00
+; semiannually → *-01,07-01 00:00:00
+;
+; this is repeat every 5 minutes starting at 0
+; OnCalendar=*:0/5
+
+; starts after 1 second then repeat
+OnActiveSec=1s
+OnUnitActiveSec=1m
 
 [Install]
-WantedBy=timers.target
+WantedBy=hyprland-session.target

@@ -1,0 +1,46 @@
+# Global
+max-history=100
+sort=-time
+
+# BINDING OPTIONS
+on-button-left=dismiss
+on-button-middle=none
+on-button-right=dismiss-all
+on-touch=dismiss
+
+# Colors
+background-color=#1e1e2ee6
+text-color=#cdd6f4
+border-color=#89b4fa
+progress-color=over #313244
+
+# STYLE OPTIONS
+font="Fantasque Sans Mono", 12
+width=250
+height=80
+margin=10
+padding=15
+border-size=1
+border-radius=10
+icons=1
+max-icon-size=48
+icon-location=left
+markup=1
+actions=1
+history=1
+text-alignment=center
+default-timeout=5000
+ignore-timeout=0
+max-visible=5
+layer=overlay
+anchor=top-right
+
+[urgency=low]
+default-timeout=2000
+
+[urgency=normal]
+default-timeout=5000
+
+[urgency=critical]
+border-color=#fab387
+

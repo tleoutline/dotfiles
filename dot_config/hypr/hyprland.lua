@@ -3,25 +3,31 @@ pcall(require, "autostart")
 pcall(require, "keybinds")
 pcall(require, "rules")
 
---- monitors
+-- monitors
 --- @diagnostic disable-next-line: missing-fields
+hl.monitor({
+	output = "DP-3",
+	mode = "1980x1080@165",
+	position = "auto",
+	scale = "auto",
+})
+hl.monitor({
+	output = "TAB-S7",
+	mode = "2560x1600@120",
+	position = "auto-left",
+	scale = "2",
+})
 hl.monitor({
 	output = "",
 	mode = "preferred",
 	position = "auto",
 	scale = "auto",
 })
-hl.monitor({
-	output = "DP-3",
-	mode = "1980x1080@160",
-	position = "auto",
-	scale = "auto",
-})
 
---- env vars
+-- env vars
 hl.env("HYPRCURSOR_SIZE", 24)
 hl.env("HYPRCURSOR_THEME", "Catppuccin Mocha Lavender")
-hl.env("WALLAPAPER", "~/Pictures/Wallpapers/skycastle.jpg")
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
 hl.config({
 	input = {
@@ -44,13 +50,13 @@ hl.config({
 			active_border = {
 				colors = {
 					c.mauve_hex,
-					c.lavender_hex,
+					c.blue_hex,
 				},
-				angle = 45,
+				angle = 135,
 			},
 			inactive_border = c.surface0_hex,
 		},
-		layout = "dwindle",
+		layout = "scrolling",
 	},
 
 	group = {
@@ -101,7 +107,7 @@ hl.config({
 	layout = {},
 
 	master = {
-		mfact = 0.6, --- master window size factor
+		mfact = 0.7, --- master window size factor
 	},
 
 	misc = {
@@ -113,16 +119,17 @@ hl.config({
 	},
 })
 
---- hyprpaper wallpaper transition
+-- animations
 hl.animation({
-	leaf = "fadeLayers",
+	leaf = "workspaces",
 	enabled = true,
-	speed = 20,
+	speed = 5,
 	bezier = "default",
 })
-hl.layer_rule({
-	name = "wallpaper-crossfade",
-	match = { namespace = "^hyprpaper$" },
-
-	animation = "fade",
+hl.animation({
+	leaf = "layers",
+	enabled = true,
+	speed = 3,
+	bezier = "default",
+	style = "popin",
 })

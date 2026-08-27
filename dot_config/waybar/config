@@ -8,9 +8,11 @@
     "margin-top": 4,
     // Choose the order of the modules
     "modules-left": [
-        "hyprland/workspaces",
+        // "hyprland/workspaces",
+        "ext/workspaces",
         "custom/close",
         "hyprland/window",
+        "hyprland/submap",
         "wlr/mode",
         "wlr/scratchpad",
         "custom/media"
@@ -40,17 +42,24 @@
             "unlocked": ""
         }
     },
-    "hyprland/workspaces": {
+    // "hyprland/workspaces": {
+    "ext/workspaces": {
         "format": "{icon}",
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"e-1\"})'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"e+1\"})'",
+        // "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace={name}})'",
+        "on-click": "activate",
         //        "format-icons": {
         //            "active": "󰝥"
         //        },
-        "cursor": 58
+        "cursor": 60
     },
     "hyprland/window": {
         "max-length": 200,
         "separate-outputs": true,
-        "justify": "center"
+        "justify": "center",
+        "icon": true,
+        "icon-size": 18,
     },
     "wlr/scratchpad": {
         "format": "{icon} {count}",
@@ -102,7 +111,8 @@
     "hyprland/language": {
         "format": "{}",
         "format-en": "EN",
-        "format-th": "TH"
+        "format-th": "TH",
+        "on-click": "~/.config/hypr/scripts/switch_lang.sh",
     },
     "clock": {
         "timezone": "Asia/Bangkok",
@@ -186,7 +196,7 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "⚠",
         // "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click": "rofi-wifi-menu"
+        "on-click": "walker -m menus:wifi --maxwidth 400"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -235,6 +245,7 @@
     },
     "custom/close": {
         "format": "",
-        "on-click": "hyprctl dispatch killactive"
+        "on-click": "hyprctl dispatch 'hl.dsp.window.close()'",
+        "cursor": 60
     }
 }

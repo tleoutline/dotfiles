@@ -1,0 +1,33 @@
+# See dunst(5) for all configuration options
+[global]
+frame_color = "#cba6f7"
+frame_width = 2
+separator_color= frame
+highlight = "#89b4fa"
+font = JetbrainsMono Nerd Font Mono 12
+alignment = center
+
+progress_bar_corner_radius = 4
+
+width = (200,300)
+height = (50,300)
+
+corner_radius = 10
+horizontal_padding = 32
+offset = (8, 8)
+gap_size = 8
+
+icon_theme = "Catppuccin Mocha Lavender, Adwaita"
+
+[urgency_low]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+[urgency_normal]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+[urgency_critical]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+frame_color = "#fab387"

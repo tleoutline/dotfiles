@@ -1,23 +1,42 @@
 yayin() {
+  local fzf_args=(
+      --preview-window 'right,70%'
+      --footer="AUR install"
+      --footer-border="rounded"
+      --bind "ctrl-u:half-page-up"
+      --bind "ctrl-d:half-page-down"
+      --bind "pgup:preview-half-page-up"
+      --bind "pgdn:preview-half-page-down"
+    )
   if [ $1 ]; then
-      yay -Ssq "$1" 2>/dev/null | fzf -m --preview 'yay -Si {1}' \
-        --preview-window 'right,70%' \
+    yay -Ssq "$1" 2>/dev/null | \
+        fzf -m --preview 'yay -Si {1} ; yay -Gp {1} | bat -l sh --color=always --file-name PKGBUILD' \
         -q "$1" \
-        --header-label="query: $header" \
-        --header-border="rounded" --header="$1" \
-        --bind "ctrl-u:half-page-up" \
-        --bind "ctrl-d:half-page-down" \
+        --header-border="rounded" \
+        --header-label="query:" \
+        --header="$1" \
+        ${fzf_args} \
         | xargs -ro yay -S
   else
-      yay -Slq 2>/dev/null | fzf -m --preview 'yay -Si {1}' --preview-window 'right,70%' | xargs -ro yay -S
+      yay -Slq 2>/dev/null | \
+        fzf -m --preview 'yay -Si {1} ; yay -Gp {1} | bat -l sh --color=always --file-name PKGBUILD' \
+        ${fzf_args} \
+        | xargs -ro yay -S
   fi
 }
 
 yayrm() {
-    yay -Qq | fzf -q "$1" -m --preview 'yay -Qi {1}' \
-      --preview-window 'right,70%' \
-      --bind "ctrl-u:half-page-up" \
-      --bind "ctrl-d:half-page-down" \
+  local fzf_args=(
+      --preview-window 'right,70%'
+      --footer="AUR uninstall"
+      --footer-border="rounded"
+      --bind "ctrl-u:half-page-up"
+      --bind "ctrl-d:half-page-down"
+      --bind "pgup:preview-half-page-up"
+      --bind "pgdn:preview-half-page-down"
+    )
+    yay -Qq | fzf -q "$1" -m --preview 'yay -Qii {1}' \
+      ${fzf_args} \
       | xargs -ro yay -Rns
 }
 

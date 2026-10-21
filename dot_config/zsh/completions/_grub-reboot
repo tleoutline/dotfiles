@@ -1,0 +1,11 @@
+#compdef grub-reboot
+
+_grub-reboot() {
+  local -a entries
+  # Extract entries from grub.cfg, using newline as the delimiter
+  entries=("${(@f)$(awk -F\' '$1=="menuentry " || $1=="submenu " {print $2}' /boot/grub/grub.cfg)}")
+
+  _describe 'grub-menu-entry' entries
+}
+
+_grub-reboot "$@"

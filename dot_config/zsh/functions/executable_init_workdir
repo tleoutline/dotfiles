@@ -25,28 +25,33 @@ touch scripts/utils.sh
 # 2. Create the enter script (.autoenv)
 cat << 'EOF' > .autoenv
 # Export variables
+CURR_DIR=${autoenv_env_file:h}
 set -a
-[ -f "$AUTOENV_CUR_DIR/.env" ] && source "$AUTOENV_CUR_DIR/.env"
+[ -f "$CURR_DIR/.env" ] && source "$CURR_DIR/.env"
 set +a
 
 # Load functions
-[ -f "$AUTOENV_CUR_DIR/scripts/utils.sh" ] && source "$AUTOENV_CUR_DIR/scripts/utils.sh"
+[ -f "$CURR_DIR/scripts/utils.sh" ] && source "$CURR_DIR/scripts/utils.sh"
 EOF
 
 # 3. Create the leave script (.autoenv.leave)
 cat << 'EOF' > .autoenv.leave
 # Unset variables defined in .env
-if [ -f "$AUTOENV_CUR_DIR/.env" ]; then
+CURR_DIR=${autoenv_env_file:h}
+if [ -f "$CURR_DIR/.env" ]; then
   while IFS='=' read -r key _; do
     # Skip empty lines and comments
     [[ -n "$key" && ! "$key" =~ ^# ]] && unset "$key"
-  done < "$AUTOENV_CUR_DIR/.env"
+  done < "$CURR_DIR/.env"
 fi
 
 # Unset functions defined in utils.sh by grabbing their names with grep
-if [ -f "$AUTOENV_CUR_DIR/scripts/utils.sh" ]; then
-  for func in $(grep -oE '^[a-zA-Z0-9_:-]+\s*\(\)' "$AUTOENV_CUR_DIR/scripts/utils.sh" | sed 's/[[:space:]]*()//'); do
+if [ -f "$CURR_DIR/scripts/utils.sh" ]; then
+  for func in $(grep -oE '^[a-zA-Z0-9_:-]+\s*\(\)' "$CURR_DIR/scripts/utils.sh" | sed 's/[[:space:]]*()//'); do
     unset -f "$func"
+  done
+  for alias in $(rg -o '^alias\s+.*=' "$CURR_DIR/scripts/utils.sh" | sed 's/alias.*\s//; s/=.*$//') ; do
+    unalias $alias
   done
 fi
 EOF

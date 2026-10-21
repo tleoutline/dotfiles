@@ -4,6 +4,10 @@ export FZF_MARKS_FILE=${HOME}/.config/fzf-marks
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 
+export AUTOENV_FILE_ENTER=".autoenv"
+export AUTOENV_FILE_LEAVE=".autoenv.leave"
+export AUTOENV_HANDLE_LEAVE=1
+
 source <(zoxide init zsh)
 
 autoload -U colors && colors
@@ -25,12 +29,10 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt share_history          # share command history data
 unsetopt beep                 # no terminal bell noise
 
-run-compinit
 export KEYTIMEOUT=40
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
 
 source <(starship init zsh)
-source /usr/share/autoenv-git/activate.sh
 # eval "$(_PIO_COMPLETE=zsh_source pio)"
 # zprof
